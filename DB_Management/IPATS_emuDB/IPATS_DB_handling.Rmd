@@ -1,0 +1,16 @@
+---
+title: "IPATS_DB_handling"
+author: "Nathalie Elsässer"
+output: pdf_document
+---
+
+```{r}
+library(emuR)
+
+path = getwd()
+
+dbHandle = load_emuDB(path)
+
+serve(dbHandle)
+```
+

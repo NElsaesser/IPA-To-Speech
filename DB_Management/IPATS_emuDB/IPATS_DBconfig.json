@@ -1,0 +1,106 @@
+{
+  "name": "IPATS",
+  "UUID": "29484cfa-1fbc-11ec-996d-37e0377b9114",
+  "mediafileExtension": "wav",
+  "levelDefinitions": [
+    {
+      "name": "bundle",
+      "type": "ITEM",
+      "attributeDefinitions": [
+        {
+          "name": "bundle",
+          "type": "STRING"
+        },
+        {
+          "name": "source",
+          "type": "STRING"
+        },
+        {
+          "name": "SAM",
+          "type": "STRING"
+        },
+        {
+          "name": "MAO",
+          "type": "STRING"
+        }
+      ]
+    },
+    {
+      "name": "ORT",
+      "type": "ITEM",
+      "attributeDefinitions": [
+        {
+          "name": "ORT",
+          "type": "STRING"
+        },
+        {
+          "name": "KAN",
+          "type": "STRING"
+        }
+      ]
+    },
+    {
+      "name": "MAU",
+      "type": "SEGMENT",
+      "attributeDefinitions": [
+        {
+          "name": "MAU",
+          "type": "STRING"
+        }
+      ]
+    }
+  ],
+  "linkDefinitions": [
+    {
+      "type": "ONE_TO_MANY",
+      "superlevelName": "bundle",
+      "sublevelName": "ORT"
+    },
+    {
+      "type": "ONE_TO_MANY",
+      "superlevelName": "ORT",
+      "sublevelName": "MAU"
+    }
+  ],
+  "EMUwebAppConfig": {
+    "perspectives": [
+      {
+        "name": "default",
+        "signalCanvases": {
+          "order": [
+            "OSCI",
+            "SPEC"
+          ],
+          "assign": [],
+          "contourLims": []
+        },
+        "levelCanvases": {
+          "order": [
+            "MAU"
+          ]
+        },
+        "twoDimCanvases": {
+          "order": []
+        }
+      }
+    ],
+    "restrictions": {
+      "showPerspectivesSidebar": true,
+      "playback": true,
+      "correctionTool": true,
+      "editItemSize": true,
+      "useLargeTextInputField": false
+    },
+    "activeButtons": {
+      "saveBundle": true,
+      "showHierarchy": true
+    }
+  },
+  "ssffTrackDefinitions": [
+    {
+      "name": "F0",
+      "columnName": "F0",
+      "fileExtension": "f0"
+    }
+  ]
+}

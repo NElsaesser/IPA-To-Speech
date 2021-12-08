@@ -30,6 +30,9 @@ def audioseg_to_np(audioseg):
 
 
 def get_start_and_end(timestamps, last_elem):
+    '''
+        gibt Diphongrenzen in Sampleangaben zurück
+    '''
     if timestamps[1] == 0:
         start = timestamps[1] + timestamps[2] - 50      # füge 50 Samples extra am Anfang der Audio hinzu
         end = 0.5 * (timestamps[1] + timestamps[2] + timestamps[3])
@@ -133,12 +136,12 @@ def simple_concatenation(arr):
         diphone = arr[elem]
         if elem == len(arr)-1:
             last_elem = True
-        start, end = get_start_and_end(diphone, last_elem)
+        start, end = get_start_and_end(diphone, last_elem)      # Diphongrenzen berechnen
         path = get_db() + "\\IPATS_emuDB\\0000_ses\\0001" + diphone[0] + "_bndl\\0001" + diphone[0] + ".wav"
         sound, sr = soundfile.read(file=path)
 
-        slices = sound[start:end]
-        concatenate = np.append(concatenate, slices)
+        slices = sound[start:end]                       # Diphon aus Audiodatei heraus kopieren
+        concatenate = np.append(concatenate, slices)    # Diphone ohne Anpassungen aneinander hängen
 
     return concatenate
 
@@ -153,20 +156,23 @@ def concatenation_zerocross(arr):
         diphone = arr[elem]
         if elem == len(arr)-1:
             last_elem = True
-        start, end = get_start_and_end(diphone, last_elem)
+        start, end = get_start_and_end(diphone, last_elem)      # Diphongrenzen berechnen
         path = get_db() + "\\IPATS_emuDB\\0000_ses\\0001" + diphone[0] + "_bndl\\0001" + diphone[0] + ".wav"
         sound, sr = soundfile.read(file=path)
 
-        start = find_zerocrossings(sound, start)
+        start = find_zerocrossings(sound, start)    # näheste Nulldurchgänge an Diphongrenzen finden
         end = find_zerocrossings(sound, end)
 
-        slices = sound[start:end]
-        concatenate = np.append(concatenate, slices)
+        slices = sound[start:end]                       # Diphon aus Audiodatei heraus kopieren
+        concatenate = np.append(concatenate, slices)    # Diphone an Nulldurchgängen aneinander hängen
 
     return concatenate
 
 
 def concatenation_crossfade(arr):
+    '''
+        Verbund der Diphone mit kurzen Überblendungen
+    '''
     concatenate = AudioSegment.empty()
     cross_new = 0
     last_elem = False
@@ -174,12 +180,12 @@ def concatenation_crossfade(arr):
         diphone = arr[elem]
         if elem == len(arr)-1:
             last_elem = True
-        start, end = get_start_and_end(diphone, last_elem)
+        start, end = get_start_and_end(diphone, last_elem)      # Diphongrenzen berechnen
         path = get_db() + "\\IPATS_emuDB\\0000_ses\\0001" + diphone[0] + "_bndl\\0001" + diphone[0] + ".wav"
         sound = AudioSegment.from_file(path, format="wav")
 
-        numpy_arr = audioseg_to_np(sound)
-        start_ms = samples_to_ms(find_zerocrossings(numpy_arr, start))
+        numpy_arr = audioseg_to_np(sound)       # Umwandlung von AudioSegment-Obj zu Numpy-Array
+        start_ms = samples_to_ms(find_zerocrossings(numpy_arr, start))      # zusätzlich Nulldurchgänge berechnen
         end_ms = samples_to_ms(find_zerocrossings(numpy_arr, end))
 
         if len(concatenate) < cross_new:            # vermeiden, dass crossfade zu lang ist
@@ -191,8 +197,8 @@ def concatenation_crossfade(arr):
 
         cross_new = int((end_ms - start_ms) * 0.1)  # Berechnung der Crossfade-Dauer (10% der Unit)
 
-        slices = sound[start_ms:end_ms]
-        concatenate = concatenate.append(slices, crossfade=cross_old)
+        slices = sound[start_ms:end_ms]                                 # Diphon aus Audiodatei heraus kopieren
+        concatenate = concatenate.append(slices, crossfade=cross_old)   # Diphone mit Crossfade überblenden
 
     return audioseg_to_np(concatenate)
 

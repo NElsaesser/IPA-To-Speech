@@ -68,6 +68,10 @@ def IPA_to_SAMPA(ipa_string):
         wandelt eine gegebene Zeichenkette in
         IPA-Transkription in die entsprechende
         Zeichenkette in X-SAMPA-Transkription um.
+        Hierbei wird die Datei "lookup.txt" verwendet.
+        In dieser Datei stehen die X-SAMPA-Umschriften
+        in der ersten Spalte, und die darauf gemappten
+        IPA-Zeichen in den weiteren Spalten.
     '''
 
     File = open(os.path.dirname(__file__) + "\\lookup.txt", "r", encoding="utf-8").read().split('\n')

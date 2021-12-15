@@ -10,6 +10,10 @@ def create_csv():
         mit zwei Spalten, in denen die erste Spalte die orthographische
         Umschrift (mediaitem) und in der zweiten Spalte die
         X-SAMPA-Umschrift (recinstructions) der Logatome beinhaltet.
+        
+        Die CSV-Dateien sind NICHT auf Github, da sie für das System
+        keinen Nutzen besitzen, können aber durch ausführen der
+        Funktion erstellt werden.
     '''
 
     with open("IPATS_Datenbank_script.xml", mode="r", encoding="latin-1") as file:

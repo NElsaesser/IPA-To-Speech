@@ -87,18 +87,17 @@ def stress_diphones():
             diphon_einzeln = line[3]
             for vok in betonte_vokale:
                 if vok in diphon_einzeln:
-                    if diphon_einzeln.find("*") > 0:
+                    if diphon_einzeln.find("*") > 0:        # Logatome, bei denen Target-Diphon am Ende steht
                         ende = (len(diphon_einzeln)-1) * -1
-                        word = sampa[:ende] + "\"" + sampa[ende:]
-                        diphon_betont = "\"" + diphon_einzeln
-                    elif diphon_einzeln.find("*") == 0:
-                        word = "\"" + sampa
+                        word = sampa[:ende] + "\"" + sampa[ende:]   # Diphon im Wort als betont markieren
+                        diphon_betont = "\"" + diphon_einzeln       # Diphon einzeln als betont markieren
+                    elif diphon_einzeln.find("*") == 0:     # Logatome, bei denen Targe-Diphon am Anfang steht
+                        word = "\"" + sampa         # Betonungszeichen an den Anfang setzen
                         diphon_betont = diphon_einzeln[0] + "\"" + diphon_einzeln[1:]
                     else:
-                        diphon_index = sampa.find(diphon_einzeln)
-                        betont_vok_index = sampa.find(vok, diphon_index)
+                        diphon_index = sampa.find(diphon_einzeln)   # Stelle des Diphons im Wort finden
+                        betont_vok_index = sampa.find(vok, diphon_index)    # Vokal im Diphon finden
                         word = sampa[:betont_vok_index] + "\"" + sampa[betont_vok_index:]
-                        # word = sampa[:sampa.find(diphon_einzeln)] + "\"" + sampa[sampa.find(diphon_einzeln):]
                         diphon_betont = diphon_einzeln[:diphon_einzeln.find(vok)] + "\"" \
                                         + diphon_einzeln[diphon_einzeln.find(vok):]
 
@@ -109,7 +108,7 @@ def stress_diphones():
                     language.append(line[4])
                     break
 
-        with open("logatome_betont.csv", mode="w", newline='') as new_file:
+        with open("logatome_betont.csv", mode="w", newline='') as new_file:     # Listen als neue CSV exportieren
             liste_schreiben = csv.writer(new_file, delimiter=',', skipinitialspace=True, quotechar=None)
             for x in range(len(fileNr)):
                 liste_schreiben.writerow([fileNr[x], logatome[x], sampa_x[x], diphone[x], language[x]])

@@ -48,7 +48,8 @@ def send_input():
                                      "Try again with another word!")
         return
 
-    concat_final.export(final)      # AUdiodatei exportieren
+    concat_final.export(final)      # Audiodatei exportieren
+    play()                          # automatisch die Datei nach der Synthese abspielen
 
 
 def play():

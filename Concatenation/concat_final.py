@@ -137,7 +137,7 @@ def simple_concatenation(arr):
         if elem == len(arr)-1:
             last_elem = True
         start, end = get_start_and_end(diphone, last_elem)      # Diphongrenzen berechnen
-        path = get_db() + "\\IPATS_emuDB\\0000_ses\\0001" + diphone[0] + "_bndl\\0001" + diphone[0] + ".wav"
+        path = os.path.join(get_db(), "IPATS_emuDB", "0000_ses", "0001" + diphone[0] + "_bndl", "0001" + diphone[0] + ".wav")
         sound, sr = soundfile.read(file=path)
 
         slices = sound[start:end]                       # Diphon aus Audiodatei heraus kopieren
@@ -157,7 +157,7 @@ def concatenation_zerocross(arr):
         if elem == len(arr)-1:
             last_elem = True
         start, end = get_start_and_end(diphone, last_elem)      # Diphongrenzen berechnen
-        path = get_db() + "\\IPATS_emuDB\\0000_ses\\0001" + diphone[0] + "_bndl\\0001" + diphone[0] + ".wav"
+        path = os.path.join(get_db(), "IPATS_emuDB", "0000_ses", "0001" + diphone[0] + "_bndl", "0001" + diphone[0] + ".wav")
         sound, sr = soundfile.read(file=path)
 
         start = find_zerocrossings(sound, start)    # näheste Nulldurchgänge an Diphongrenzen finden
@@ -181,7 +181,7 @@ def concatenation_crossfade(arr):
         if elem == len(arr)-1:
             last_elem = True
         start, end = get_start_and_end(diphone, last_elem)      # Diphongrenzen berechnen
-        path = get_db() + "\\IPATS_emuDB\\0000_ses\\0001" + diphone[0] + "_bndl\\0001" + diphone[0] + ".wav"
+        path = os.path.join(get_db(), "IPATS_emuDB", "0000_ses", "0001" + diphone[0] + "_bndl", "0001" + diphone[0] + ".wav")
         sound = AudioSegment.from_file(path, format="wav")
 
         numpy_arr = audioseg_to_np(sound)       # Umwandlung von AudioSegment-Obj zu Numpy-Array
@@ -209,10 +209,10 @@ def export(numpy_array):
     '''
     save = os.path.join(os.path.dirname(__file__), '..')
     try:
-        soundfile.write(file=save + "\\concatenated_word.wav", data=numpy_array, samplerate=get_sr())
+        soundfile.write(file=os.path.join(save, "concatenated_word.wav"), data=numpy_array, samplerate=get_sr())
         return
     except RuntimeError:        # für den Fall, dass die Audiodatei noch geöffnet ist
         pygame.mixer.music.unload()
-        os.remove(save + "\\concatenated_word.wav")
-        soundfile.write(file=save + "\\concatenated_word.wav", data=numpy_array, samplerate=get_sr())
+        os.remove(os.path.join(save, "concatenated_word.wav"))
+        soundfile.write(file=os.path.join(save, "concatenated_word.wav"), data=numpy_array, samplerate=get_sr())
         return

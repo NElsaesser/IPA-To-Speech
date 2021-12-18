@@ -74,7 +74,7 @@ def IPA_to_SAMPA(ipa_string):
         IPA-Zeichen in den weiteren Spalten.
     '''
 
-    File = open(os.path.dirname(__file__) + "\\lookup.txt", "r", encoding="utf-8").read().split('\n')
+    File = open(os.path.join(os.path.dirname(__file__), "lookup.txt"), "r", encoding="utf-8").read().split('\n')
     lookuptable = []
     for x in File:
         values = x.split(",")

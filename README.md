@@ -4,9 +4,9 @@
  The IPA-To-Speech-system is a speech synthesis system. It is capable of converting transcriptions of the International Phonetic Alphabet to speech sounds. The IPA-To-Speech-system works best for transcriptions of German words, it also has limited capabilities for English and French.
  
  # Requirements
- To get the correct packages: ```pip install -r requirements.txt```
+ To get the correct package versions: ```pip install -r requirements.txt```
  
- The following python package versions were used during the implementation, there's no guarantee that it works with other versions. It was tested on Linux Mint, Windows 10 and macOS with Python 3.
+ The following python package versions were used during the implementation, there's no guarantee that it works with other versions. The system was tested on Linux Mint, Windows 10 and macOS with Python 3.
  * AMFM-decompy ver. 1.0.11
  * Librosa ver. 0.8.0
  * matplotlib ver. 3.4.3

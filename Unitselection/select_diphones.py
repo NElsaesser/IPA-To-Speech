@@ -44,7 +44,7 @@ def find_file_nrs(list):
         sucht nach den benötigten Diphonen
         und gibt die zugehörigen Dateinummern zurück
     '''
-    with open(os.path.dirname(__file__) + "\\logatome_lookup.csv", mode="r", encoding="latin-1") as file:
+    with open(os.path.join(os.path.dirname(__file__), "logatome_lookup.csv"), mode="r", encoding="latin-1") as file:
         file = csv.reader(file, delimiter=',', skipinitialspace=True, quotechar=None)
         logatome = []
         for line in file:
@@ -188,7 +188,7 @@ def select(di_list):
                 return False
             nr = ersatz[0]
         timest = find_timestamps(
-            "\\IPATS_emuDB\\0000_ses\\0001" + nr + "_bndl\\0001" + nr + "_annot.json", diphon)
+            os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "DB_Management")), "IPATS_emuDB", "0000_ses", "0001" + nr + "_bndl", "0001" + nr + "_annot.json"), diphon)
         di_array.append([nr, timest[0], timest[1], timest[2]])
 
         i += 1

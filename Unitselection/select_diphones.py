@@ -73,7 +73,7 @@ def find_timestamps(path, di_li):
         Die _annot.json-Datei wird mit Hilfe des json-Moduls
         als verschachtelte Dictionaries eingelesen.
     '''
-    with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'DB_Management')) + path) as json_file:
+    with open(path) as json_file:
         data = json.load(json_file)
         found = False
         start_di, duration, end_di = 0, 0, 0

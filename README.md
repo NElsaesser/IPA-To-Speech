@@ -8,14 +8,14 @@
  
  The following python package versions were used during the implementation, there's no guarantee that it works with other versions. It was tested on Windows 10 with Python 3.8 and 3.9.
  * AMFM-decompy ver. 1.0.11
- * Librosa ver 0.8.0
+ * Librosa ver. 0.8.0
  * matplotlib ver. 3.4.3
  * numpy ver. 1.19.5
- * psola ver 0.0.1
+ * psola ver. 0.0.1
  * pydub ver. 0.25.1
  * pygame ver. 2.0.1
  * SoundFile ver. 0.10.3
- * Tkinter ver 8.6
+ * Tkinter ver. 8.6
 
 
 # How-to start

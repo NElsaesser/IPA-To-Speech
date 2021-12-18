@@ -6,7 +6,7 @@
  # Requirements
  To get the correct packages: ```pip install -r requirements.txt```
  
- The following python package versions were used during the implementation, there's no guarantee that it works with other versions. It was tested on Linux Mint and Windows 10 with Python 3.
+ The following python package versions were used during the implementation, there's no guarantee that it works with other versions. It was tested on Linux Mint, Windows 10 and macOS with Python 3.
  * AMFM-decompy ver. 1.0.11
  * Librosa ver. 0.8.0
  * matplotlib ver. 3.4.3

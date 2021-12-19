@@ -24,3 +24,6 @@
 * choose the concatenation and smoothing method
 * click "Synthesize!"
 * to listen to your word, click "Play IPA"
+
+# Disclaimer
+The logatome corpus that can be found in the folder ```Vorverarbeitung``` was retrieved from (The Bavarian Archive for Speech Signal)[https://www.bas.uni-muenchen.de/Bas/BasBITSLGDOC/HTML/Logatome_List.html].
